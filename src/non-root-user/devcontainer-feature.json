@@ -1,0 +1,9 @@
+{
+  "id": "non-root-user",
+  "version": "1.0.0",
+  "name": "Create and Configure Non-Root User",
+  "description": "Create standard dev-user (UID/GID 1000) with sudo-rights.",
+  "containerEnv": {
+    "HOME": "/home/developer"
+  }
+}

@@ -1,0 +1,17 @@
+name: Release Feature
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish Devcontainer Feature
+        uses: devcontainers/action@v1
+        with:
+          publish-features: "true"
+          base-path-to-features: "./src" # Pfad zu deinem Feature-Ordner
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
