@@ -10,4 +10,4 @@ Settings I want for my devcontainers.
   It also sets up less for highlighting.
 
 - cpp-devtools:
-  TODO This sets up the container for C++ development.
+  This sets up the container for C++ development and adds VS Code extension to help/support that.

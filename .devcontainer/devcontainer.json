@@ -16,8 +16,6 @@
     "customizations": {
         "vscode": {
             "extensions": [
-                "ms-azuretools.vscode-containers",
-                "maattdd.gitless",
                 "EditorConfig.EditorConfig"
             ]
         }
