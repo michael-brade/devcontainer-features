@@ -1,0 +1,63 @@
+{
+    "id": "cpp-devtools",
+    "version": "1.0.0",
+    "name": "C++ DevTools",
+    "description": "Tools and configuration to ease developing with C++",
+
+    "customizations": {
+        "vscode": {
+            // Set *default* container specific settings.json values on container create.
+            "settings": {
+                "cmake.configureOnOpen": true,
+                "cmake.copyCompileCommands": "${workspaceFolder}/build/compile_commands.json",
+                "clangd.arguments": [
+                    "--compile-commands-dir=${workspaceFolder}/build",
+                    "-j", "8",
+                    "--background-index-priority=normal"
+                ],
+                "cmake.ctestDefaultArgs": [],
+                "cmake.ctest.testExplorerIntegrationEnabled": false,
+                // For matepek.vscode-catch2-test-adapter
+                "testMate.cpp.test.executables": "{build,Build,BUILD,out}/**/*{test,Test,TEST}*",
+                "testMate.cpp.log.logpanel": true,
+                "testMate.cpp.test.parallelExecutionLimit": 1,
+                "testMate.cpp.test.parallelExecutionOfExecutableLimit": 8
+            },
+            "extensions": [
+                "ms-vscode.cpptools",
+                "ms-vscode.cmake-tools",
+                "llvm-vs-code-extensions.vscode-clangd",
+                "xaver.clang-format",
+                "matepek.vscode-catch2-test-adapter",
+                "vadimcn.vscode-lldb",
+                "webfreak.debug",
+                "llvm-vs-code-extensions.lldb-dap"
+            ]
+        }
+    },
+
+    "containerEnv": {
+        "CONAN_HOME": "/dev-caches/conan2",
+        "CCACHE_DIR": "/dev-caches/ccache"
+    },
+
+    "mounts": [
+        {
+            "source": "dev-cache-conan2",
+            "target": "/dev-caches/conan2",
+            "type": "volume"
+        },
+        {
+            "source": "dev-cache-ccache",
+            "target": "/dev-caches/ccache",
+            "type": "volume"
+        },
+        {
+            "source": "dev-cache-clangd",
+            "target": "/dev-caches/clangd",
+            "type": "volume"
+        }
+    ],
+
+    "postCreateCommand": "mkdir -p '${containerWorkspaceFolder}/build/.cache' && ln -s /dev-caches/clangd '${containerWorkspaceFolder}/build/.cache/clangd'"
+}
