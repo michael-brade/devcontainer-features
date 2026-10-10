@@ -1,15 +1,10 @@
 #!/bin/sh
 set -e
 
-echo "Starte Konfiguration von Bash-Aliasen und Less..."
+echo "Start setting up aliases, less, and git..."
 
-# Sicherstellen, dass Quelltext-Highlighting für less installiert ist
-if [ -x "$(command -v apt-get)" ]; then
-    apt-get update && apt-get install -y source-highlight
-fi
-
-# Aliase in die globale Bash-Konfiguration schreiben (/etc/bash.bashrc)
-cat << 'EOF' >> /etc/bash.bashrc
+# write aliases and settings to the global bash configuration
+cat << EOF >> /etc/bash.bashrc
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
@@ -57,20 +52,23 @@ alias lsd='ls -d */'
 EOF
 
 
-# Systemweite git Aliase in /etc/gitconfig.
+# system-wide git aliases in /etc/gitconfig.
 
-git config --system alias.s "status"
-git config --system alias.sa "status --ignored"
+if [ -x /usr/bin/git ]; then
+  git config --system alias.s "status"
+  git config --system alias.sa "status --ignored"
 
-git config --system alias.d "diff"
-git config --system alias.ds "diff --staged"
+  git config --system alias.d "diff"
+  git config --system alias.ds "diff --staged"
 
-git config --system alias.p "pull --recurse-submodules"
+  git config --system alias.p "pull --recurse-submodules"
 
-git config --system alias.l "log --graph -m --pretty='tformat:%h %C(auto) %ad %an %d %s' --date=short"
-git config --system alias.la "log --graph -m --pretty='tformat:%h %C(auto) %ad %an %d %s' --date=short --all"
-git config --system alias.ll "log --graph -m --stat --decorate --no-merges"
-git config --system alias.lla "log --graph -m --stat --decorate --no-merges --all"
+  git config --system alias.l "log --graph -m --pretty='tformat:%h %C(auto) %ad %an %d %s' --date=short"
+  git config --system alias.la "log --graph -m --pretty='tformat:%h %C(auto) %ad %an %d %s' --date=short --all"
+  git config --system alias.ll "log --graph -m --stat --decorate --no-merges"
+  git config --system alias.lla "log --graph -m --stat --decorate --no-merges --all"
+else
+  echo "WARNING: git not available, git aliases not installed!"
+fi
 
-
-echo "Installation erfolgreich abgeschlossen!"
+echo "Installation finished successfully!"

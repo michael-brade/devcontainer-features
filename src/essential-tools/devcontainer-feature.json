@@ -1,0 +1,6 @@
+{
+  "id": "essential-tools",
+  "version": "1.0.0",
+  "name": "Essential DevContainer tools",
+  "description": "Tools needed in every DevContainer: git, less, htop, nvim, rsync."
+}

@@ -1,12 +1,20 @@
 {
   "id": "bash-aliases",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "name": "Bash Aliases and Less Config",
-  "description": "Fügt nützliche Bash-Aliase für ls, mv, cp hinzu und optimiert die less-Ausgabe inklusive Syntax-Highlighting.",
+  "description": "Useful Bash-Aliases for ls, mv, cp, git; better less display incl. syntax highlighting.",
+
+  "installsAfter": [
+    "ghcr.io/michael-brade/devcontainer-features/essential-tools",
+    "./src/essential-tools"
+  ],
 
   "containerEnv": {
     "LESSCHARSET": "utf-8",
     "LESS": "-QRMSi -c -y1",
     "LESSOPEN": "| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
-  }
+  },
+
+  // source /etc/bash.bashrc again AFTER ~/.bashrc so it doesn't overwrite this feature's settings
+  "onCreateCommand": "echo '[ -f /etc/bash.bashrc ] && . /etc/bash.bashrc' >> ~/.bashrc"
 }
