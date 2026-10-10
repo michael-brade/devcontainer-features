@@ -1,6 +1,6 @@
 {
     "id": "cpp-devtools",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "name": "C++ DevTools",
     "description": "Tools and configuration to ease developing with C++",
 
@@ -8,23 +8,37 @@
         "vscode": {
             // Set *default* container specific settings.json values on container create.
             "settings": {
+                "cmake.allowCommentsInPresetsFile": true,
                 "cmake.configureOnOpen": true,
+                "cmake.options.statusBarVisibility": "visible",
                 "cmake.copyCompileCommands": "${workspaceFolder}/build/compile_commands.json",
                 "clangd.arguments": [
                     "--compile-commands-dir=${workspaceFolder}/build",
                     "-j", "8",
                     "--background-index-priority=normal"
                 ],
+                "C_Cpp.codeAnalysis.clangTidy.enabled": true,
+                "C_Cpp.codeAnalysis.clangTidy.useBuildPath": true,
+                "C_Cpp.intelliSenseEngine": "disabled",
+                "C_Cpp.autocomplete": "disabled",
+                "C_Cpp.errorSquiggles": "disabled",
                 "cmake.ctestDefaultArgs": [],
                 "cmake.ctest.testExplorerIntegrationEnabled": false,
                 // For matepek.vscode-catch2-test-adapter
                 "testMate.cpp.test.executables": "{build,Build,BUILD,out}/**/*{test,Test,TEST}*",
                 "testMate.cpp.log.logpanel": true,
                 "testMate.cpp.test.parallelExecutionLimit": 1,
-                "testMate.cpp.test.parallelExecutionOfExecutableLimit": 8
+                "testMate.cpp.test.parallelExecutionOfExecutableLimit": 8,
+                "[c]": {
+                    "editor.defaultFormatter": "xaver.clang-format"
+                },
+                "[cpp]": {
+                    "editor.defaultFormatter": "xaver.clang-format"
+                }
             },
             "extensions": [
                 "ms-vscode.cpptools",
+                "-ms-vscode.cpp-devtools",
                 "ms-vscode.cmake-tools",
                 "llvm-vs-code-extensions.vscode-clangd",
                 "xaver.clang-format",
@@ -36,9 +50,25 @@
         }
     },
 
+    "options": {
+        "ccacheSize": {
+            "type": "string",
+            "proposals": ["5GB", "10GB", "20GB"],
+            "default": "20GB",
+            "description": "Maximum size of the ccache storage"
+        },
+        "enableMasquerading": {
+            "type": "boolean",
+            "default": false,
+            "description": "Enable compiler masquerading for ccache"
+        }
+    },
+
     "containerEnv": {
         "CONAN_HOME": "/dev-caches/conan2",
-        "CCACHE_DIR": "/dev-caches/ccache"
+        "CCACHE_DIR": "/dev-caches/ccache",
+        // for compiler masquerading
+        "PATH": "/usr/local/lib/ccache-links:${localEnv:PATH}"
     },
 
     "mounts": [
@@ -59,5 +89,6 @@
         }
     ],
 
+    "onCreateCommand": "ccache --max-size=${CPP_DEVTOOLS_CCACHESIZE:-20GB}",
     "postCreateCommand": "mkdir -p '${containerWorkspaceFolder}/build/.cache' && ln -s /dev-caches/clangd '${containerWorkspaceFolder}/build/.cache/clangd'"
 }

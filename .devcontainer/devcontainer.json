@@ -16,6 +16,7 @@
     "customizations": {
         "vscode": {
             "extensions": [
+                "timonwong.shellcheck",
                 "EditorConfig.EditorConfig"
             ]
         }

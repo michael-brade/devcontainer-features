@@ -58,7 +58,22 @@ mkdir -p /dev-caches/conan2
 mkdir -p /dev-caches/ccache
 mkdir -p /dev-caches/clangd
 
-# Grant the non-root developer full ownership
+# grant the non-root developer full ownership
 chown -R ${USERNAME}:${USERNAME} /dev-caches
+
+
+if [ "${CPP_DEVTOOLS_ENABLEMASQUERADING:-true}" = "true" ]
+then
+    echo "Enabling compiler masquerading..."
+
+    mkdir -p /usr/local/lib/ccache-links
+
+    # create symlinks to ccache
+    ln -s $(which ccache) /usr/local/lib/ccache-links/gcc
+    ln -s $(which ccache) /usr/local/lib/ccache-links/g++
+    ln -s $(which ccache) /usr/local/lib/ccache-links/clang
+    ln -s $(which ccache) /usr/local/lib/ccache-links/clang++
+fi
+
 
 echo "Installation finished successfully!"

@@ -11,3 +11,6 @@ Settings I want for my devcontainers.
 
 - cpp-devtools:
   This sets up the container for C++ development and adds VS Code extension to help/support that.
+  Possible options:
+    - ccacheSize (default 20GB)
+    - enableMasquerading (default off)
