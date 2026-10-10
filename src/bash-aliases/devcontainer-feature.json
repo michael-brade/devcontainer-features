@@ -1,12 +1,11 @@
 {
   "id": "bash-aliases",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "name": "Bash Aliases and Less Config",
   "description": "Useful Bash-Aliases for ls, mv, cp, git; better less display incl. syntax highlighting.",
 
   "installsAfter": [
-    "ghcr.io/michael-brade/devcontainer-features/essential-tools",
-    "./src/essential-tools"
+    "ghcr.io/michael-brade/devcontainer-features/essential-tools"
   ],
 
   "containerEnv": {

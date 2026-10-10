@@ -7,6 +7,11 @@
         "./src/bash-aliases": {}
     },
 
+    "overrideFeatureInstallOrder": [
+        "./src/essential-tools",
+        "./src/bash-aliases"
+    ],
+
     "runArgs": [
         "--name", "DevContainer-features-${devcontainerId}",
         "--network=host",
