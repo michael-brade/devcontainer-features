@@ -72,4 +72,7 @@ else
   echo "WARNING: git not available, git aliases not installed!"
 fi
 
+# WORKAROUND for Podman bug https://github.com/podman-container-tools/buildah/issues/6503
+touch /tmp
+
 echo "Installation finished successfully!"
