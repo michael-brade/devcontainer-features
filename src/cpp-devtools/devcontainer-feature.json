@@ -1,6 +1,6 @@
 {
     "id": "cpp-devtools",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "name": "C++ DevTools",
     "description": "Tools and configuration to ease developing with C++",
 
@@ -68,7 +68,7 @@
         "CONAN_HOME": "/dev-caches/conan2",
         "CCACHE_DIR": "/dev-caches/ccache",
         // for compiler masquerading
-        "PATH": "/usr/local/lib/ccache-links:${localEnv:PATH}"
+        "PATH": "/usr/local/lib/ccache-links:${PATH}"
     },
 
     "mounts": [
