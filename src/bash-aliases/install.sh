@@ -4,13 +4,14 @@ set -e
 echo "Start setting up aliases, less, and git..."
 
 # write aliases and settings to the global bash configuration
-cat << EOF >> /etc/bash.bashrc
+# use quoted 'EOF' so that the content is NOT expanded!
+cat << 'EOF' >> /etc/bash.bashrc
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
 # color prompt
-if [ "`id -u`" -eq 0 ]; then
+if [ "$(id -u)" -eq 0 ]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
