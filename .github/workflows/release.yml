@@ -2,12 +2,16 @@ name: Release Feature
 on:
   push:
     branches: [ master ]
+    paths:
+      - 'src/**'
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Publish Devcontainer Feature
         uses: devcontainers/action@v1
         with:
